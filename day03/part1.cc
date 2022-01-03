@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cassert>
 
 void bstr_to_count(const std::string &line, std::vector<uint> &counts) {
 	for (uint i = 0; i < line.length(); i++) {
