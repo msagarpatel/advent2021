@@ -1,4 +1,5 @@
 #include <iostream>
+#include <climits>
 
 int main() {
     // assumes depths are non-negative.
