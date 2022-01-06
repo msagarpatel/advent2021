@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 project(advent2021)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS_DEBUG_INIT "-Wall -Werror -g3 -ggdb")
+set(CMAKE_CXX_FLAGS_RELEASE_INIT "-Wall -Werror -O2")
 
 add_executable(d01p1 day01/part1.cc)
 add_executable(d01p2 day01/part2.cc)
