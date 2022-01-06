@@ -14,13 +14,13 @@
 
 // this function assumes that a rating always exists
 std::string find_rating(const uint index, const std::function<bool(uint, uint)>& pred,
-						const std::vector<const std::string>& lines) {
+						const std::vector<std::string>& lines) {
 	// check stopping condition
 	if (lines.size() == 1)
 		return lines.front();
 
 	// partition input into zeros and ones at index
-	std::vector<const std::string> zeros, ones;
+	std::vector<std::string> zeros, ones;
 	std::partition_copy(lines.begin(), lines.end(),
 					 std::back_inserter(zeros), std::back_inserter(ones),
 					 [index] (std::string line) {return line[index] == '0';});
@@ -40,7 +40,7 @@ int main() {
 	// current line/number
 	std::string line;
 	// vector of all lines
-	std::vector<const std::string> lines;
+	std::vector<std::string> lines;
 	// total number of lines in stdin
 	uint num_lines = 0;
 
