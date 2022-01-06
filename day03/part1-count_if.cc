@@ -22,8 +22,8 @@ int main() {
 
 	// compute gamma and epsilon
 	// assumes there is always a most/least common bit
-	// assumes the length of each bitstring is the same
 	// So, the case where the number of zeros and ones are the same is not considered.
+	// assumes the length of each bitstring is the same
 	std::string gamma, epsilon;
 	for (int i = 0; i < line.length(); i++) {
 		uint count = std::count_if(lines.begin(), lines.end(), [i](const std::string& str){
