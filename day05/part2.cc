@@ -20,6 +20,14 @@ void print_map(std::array<std::array<uint, MAX_SIZE>, MAX_SIZE>& map) {
 	}
 }
 
+int get_inc(uint first, uint second) {
+	if (first == second)
+		return 0;
+	if (first < second)
+		return 1;
+	return -1;
+}
+
 int main() {
 	// parse input
 	std::string line;
@@ -37,33 +45,16 @@ int main() {
 		assert(p.max() < MAX_SIZE);
 		auto begin = p.begin();
 		auto end = p.end();
-		if (begin.first == end.first) {
-			// traverse column
-			const uint col = begin.first;
-			const uint start = std::min(begin.second, end.second);
-			const uint stop = std::max(begin.second, end.second);
-			for (uint i = start; i <= stop; i++)
-				map[i][col] += 1;
-		}
-		else if (begin.second == end.second) {
-			// traverse row
-			const uint row = begin.second;
-			const uint start = std::min(begin.first, end.first);
-			const uint stop = std::max(begin.first, end.first);
-			for (uint i = start; i <= stop; i++)
-				map[row][i] += 1;
-		}
-		else {
-			// traverse diagonally
-			// TODO: the three if-clauses can just become this one clause
-			const int row_inc = begin.second < end.second ? 1 : -1;
-			const int col_inc = begin.first < end.first ? 1 : -1;
-			auto pred = row_inc == 1 ? std::less_equal<>() :
-			        (std::function<bool(int,int)>)std::greater_equal<>();
-			for (int row = begin.second, col = begin.first; pred(row, end.second);
-				col += col_inc, row += row_inc)
-				map[row][col] += 1;
-		}
+		const int row_inc = get_inc(begin.second, end.second);
+		const int col_inc = get_inc(begin.first, end.first);
+		auto row_pred = row_inc == 1 ? std::less_equal<>() :
+		                (std::function<bool(int,int)>)std::greater_equal<>();
+		auto col_pred = col_inc == 1 ? std::less_equal<>() :
+		                (std::function<bool(int,int)>)std::greater_equal<>();
+		for (int row = begin.second, col = begin.first;
+		     row_pred(row, end.second) && col_pred(col, end.first);
+		     col += col_inc, row += row_inc)
+			map[row][col] += 1;
 		// print_map(map);
 	}
 
