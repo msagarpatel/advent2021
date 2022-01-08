@@ -3,6 +3,7 @@
 #include <array>
 #include "path.h"
 #include <cassert>
+#include <functional>
 
 const uint MAX_SIZE = 1000;
 
@@ -38,23 +39,30 @@ int main() {
 		auto end = p.end();
 		if (begin.first == end.first) {
 			// traverse column
-			const uint row = begin.first;
+			const uint col = begin.first;
 			const uint start = std::min(begin.second, end.second);
 			const uint stop = std::max(begin.second, end.second);
 			for (uint i = start; i <= stop; i++)
-				map[i][row] += 1;
+				map[i][col] += 1;
 		}
 		else if (begin.second == end.second) {
-			// assert(begin.second == end.second);
 			// traverse row
-			const uint column = begin.second;
+			const uint row = begin.second;
 			const uint start = std::min(begin.first, end.first);
 			const uint stop = std::max(begin.first, end.first);
 			for (uint i = start; i <= stop; i++)
-				map[column][i] += 1;
+				map[row][i] += 1;
 		}
 		else {
-			// intentionally empty
+			// traverse diagonally
+			// TODO: the three if-clauses can just become this one clause
+			const int row_inc = begin.second < end.second ? 1 : -1;
+			const int col_inc = begin.first < end.first ? 1 : -1;
+			auto pred = row_inc == 1 ? std::less_equal<>() :
+			        (std::function<bool(int,int)>)std::greater_equal<>();
+			for (int row = begin.second, col = begin.first; pred(row, end.second);
+				col += col_inc, row += row_inc)
+				map[row][col] += 1;
 		}
 		// print_map(map);
 	}

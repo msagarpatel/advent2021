@@ -15,6 +15,7 @@ public:
 	uint max();
 
 	// it would have been cool to create an iterator that produces each point between begin and end
+	// UPDATE: Now that I think of it, this class it pretty useless without the iterator.
 };
 
 
