@@ -2,6 +2,7 @@
 #include <array>
 #include <cassert>
 #include <numeric>
+#include <algorithm>
 
 // Need a new strategy due to the (exponential?) increase in processing time. We don't care about
 // individual fish, or their ages in number of cycles. We just need to know the age of the fish
