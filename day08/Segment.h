@@ -2,6 +2,7 @@
 #define ADVENT2021_SEGMENT_H
 
 #include <array>
+#include <vector>
 #include <locale>
 
 class Segment {
@@ -13,6 +14,7 @@ class Segment {
 public:
 	Segment(std::string line);
 	uint count_output_length(std::vector<uint> lengths);
+	uint decode();
 };
 
 #endif //ADVENT2021_SEGMENT_H
