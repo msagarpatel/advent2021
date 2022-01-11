@@ -2,6 +2,8 @@
 #include <vector>
 #include <sstream>
 #include <numeric>
+#include <cassert>
+#include <algorithm>
 
 template<typename T>
 void print_vec(const std::vector<T>& vec, std::string msg) {
