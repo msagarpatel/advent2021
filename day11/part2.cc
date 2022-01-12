@@ -65,7 +65,7 @@ int main() {
 
 	// iterate steps
 	int flashes = 0;
-	for (int step = 1; step <= 100; step++) {
+	for (int step = 1; ; step++) {
 		// increase energy level of each octopus
 		std::for_each(octopi.begin(), octopi.end(), [](auto& vec) {
 			std::for_each(vec.begin(), vec.end(), [](auto& num) {num++;});
@@ -98,8 +98,11 @@ int main() {
 		flashes += iter_flashes;
 		// std::cout << step << ": " << iter_flashes << " -> " << flashes << std::endl;
 		// print_2d_vec(octopi, "Step " + std::to_string(step));
+		if (iter_flashes == octopi.size()*octopi.size()) {
+			std::cout << "Step = " << step << std::endl;
+			break;
+		}
 	}
 
-	std::cout << "Flashes = " << flashes << std::endl;
 	return EXIT_SUCCESS;
 }
