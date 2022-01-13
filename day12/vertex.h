@@ -14,6 +14,7 @@ public:
 	friend bool operator<(const Vertex &lhs, const Vertex &rhs);
 	friend bool operator==(const Vertex &lhs, const std::string &rhs);
 	bool isBig() const;
+	bool isSentinel() const;
 };
 
 #endif //ADVENT2021_VERTEX_H

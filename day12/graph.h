@@ -13,6 +13,8 @@ public:
 	Graph();
 	void insert_edge(const std::string &edge);
 	int num_paths();
+	// make two separate functions for backward compatibility with part 1.
+	int num_paths_part2();
 };
 
 

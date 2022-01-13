@@ -33,3 +33,23 @@ int Graph::num_paths() {
 	return count;
 }
 
+int Graph::num_paths_part2() {
+	int count = 0;
+	std::deque<Path> paths;
+	paths.emplace_back(Vertex(std::string("start")));
+	while (!paths.empty()) {
+		auto path = paths.front();
+		paths.pop_front();
+		if (path.last_visited == "end") {
+			count++;
+			continue;
+		}
+		for (const auto& v : adjacency_list[path.last_visited]) {
+			if (!path.visited[v] || v.isBig())
+				paths.emplace_back(path, v);
+			else if (!path.visitedSmallTwice() && !v.isSentinel())
+				paths.emplace_back(path, v, true);
+		}
+	}
+	return count;
+}
