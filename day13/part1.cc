@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <cassert>
 
 // problem assumes dot never occurs along line
 
