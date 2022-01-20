@@ -3,7 +3,7 @@
 #include <map>
 #include <cassert>
 #include <unordered_map>
-#include <numeric>
+#include <algorithm>
 
 int main() {
 	// get polymer template and store as std::forward_list<char>
@@ -26,7 +26,7 @@ int main() {
 
 	// run the process 10 times
 	for (int step = 0; step < 10; step++) {
-		// + is not defined for list iterators, so iterate over the list a bit unconventionally
+		// + is not defined for forward_iterators, so iterate over the list a bit unconventionally
 		for (auto i = chain.cbegin(); ;) {
 			// check if last character (which is the stopping condition)
 			auto i_plus_1 = i;
@@ -43,11 +43,16 @@ int main() {
 
 			// minor optimization: skip inserted element here since we've already incremented
 			// This assumes copy construction is cheaper than two increments.
+			// TODO: CLion is warning me that: Local variable 'i' may point to invalidated memory.
+			//  Shouldn't the copy constructor be invoked here? The warning goes away if I just
+			//  do two increments: i++ ++;
 			i = i_plus_1;
 		}
 	}
 
 	// compute all frequencies
+	// works since value is default-constructed if key is missing
+	// TODO: is it safe to assume int is default constructed to 0?
 	std::unordered_map<char,int> freq;
 	for (const auto& c : chain)
 		freq[c]++;

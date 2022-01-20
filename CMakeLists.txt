@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(advent2021)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS_DEBUG_INIT "-Wall -Werror -g3 -ggdb")
+set(CMAKE_CXX_FLAGS_DEBUG_INIT "-Wall -Werror -g3 -ggdb -O0")
 set(CMAKE_CXX_FLAGS_RELEASE_INIT "-Wall -Werror -O2")
 
 add_executable(d01p1 day01/part1.cc)
@@ -33,3 +33,4 @@ add_executable(d12p2 day12/part2.cc day12/vertex.cc day12/graph.cc day12/path.cc
 add_executable(d13p1 day13/part1.cc)
 add_executable(d13p2 day13/part2.cc)
 add_executable(d14p1 day14/part1.cc)
+add_executable(d14p2 day14/part2.cc)
